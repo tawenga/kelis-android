@@ -52,6 +52,9 @@ public class VerifyPhoneActivity extends AppCompatActivity
             requestPermissions();
         }
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.loading));
+
         findViewById(R.id.verify_phone_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,13 +127,12 @@ public class VerifyPhoneActivity extends AppCompatActivity
     }
 
     private void hideProgress() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.loading));
+        progressDialog.cancel();
 
     }
 
     private void showProgress() {
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressIndicator);
+        progressDialog.show();
     }
 
 
