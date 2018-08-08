@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Kelis</string>
+    <string name="action_settings">Settings</string>
+    <string name="phone_number">Phone number (0700123456)</string>
+    <string name="enter_the_code_received_through_sms">Enter the code received through sms</string>
+    <string name="input_code">Input Code</string>
+    <string name="next">Next</string>
+    <string name="please_try_again">Please try again</string>
+    <string name="loading">Loading...</string>
+</resources>

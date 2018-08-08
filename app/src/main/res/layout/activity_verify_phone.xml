@@ -1,0 +1,39 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".VerifyPhoneActivity">
+
+    <TextView
+        android:id="@+id/input_code_instructions_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/enter_the_code_received_through_sms"/>
+
+    <EditText android:id="@+id/input_code_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:inputType="number"
+        android:hint="@string/input_code"
+        android:background="@drawable/edit_text_background"
+        />
+
+    <Button
+        android:id="@+id/verify_input_code_button"
+        android:background="@drawable/button_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:text="@string/next" />
+</LinearLayout>
+
+
+
+    </LinearLayout>
+
