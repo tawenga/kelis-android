@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:inputType="number"
-        android:hint="@string/input_code"
+        android:hint="@string/enter_code"
         android:background="@drawable/edit_text_background"
         />
 
@@ -34,6 +34,4 @@
 </LinearLayout>
 
 
-
-    </LinearLayout>
 
