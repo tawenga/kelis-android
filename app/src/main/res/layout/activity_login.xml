@@ -13,7 +13,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dimen_112"
+        android:layout_marginTop="@dimen/dimen_36"
         android:textSize="@dimen/sp_36"
         />
 
@@ -58,7 +58,7 @@
             android:id="@+id/new_account_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/get_new_account"
+            android:text="@string/create_new_account"
             android:textColor="@color/blue"
             android:layout_alignParentLeft="true"
            android:layout_centerVertical="true"/>

@@ -10,7 +10,7 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="login">Login</string>
-    <string name="get_new_account">Get new account</string>
+    <string name="create_new_account">Create new account</string>
     <string name="save">Save</string>
     <string name="password">Password</string>
     <string name="enter_password_again">Enter password again</string>

@@ -9,4 +9,8 @@
     <dimen name="dimen_8">8dp</dimen>
     <dimen name="dimen_36">36dp</dimen>
     <dimen name="dimen_112">112dp</dimen>
+    <dimen name="dimen_24">24dp</dimen>
+    <dimen name="dimen_72">72dp</dimen>
+    <dimen name="dimen_64">64dp</dimen>
+    <dimen name="dimen_48">48dp</dimen>
 </resources>

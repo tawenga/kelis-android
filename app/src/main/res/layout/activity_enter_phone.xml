@@ -1,10 +1,18 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".EnterPhoneActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@color/white"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <EditText
         android:id="@+id/phone_number_edit_text"
@@ -13,19 +21,33 @@
         android:hint="@string/enter_phone"
         android:maxLength="10"
         android:background="@drawable/edit_text_background"
-        android:inputType="phone">
+        android:inputType="phone"
+        android:layout_marginTop="@dimen/dimen_24"
+        android:layout_marginRight="@dimen/dimen_16"
+        android:layout_marginLeft="@dimen/dimen_16"
+        android:padding="@dimen/dimen_8">
 
         <requestFocus/>
     </EditText>
 
-    <Button
-        android:id="@+id/verify_phone_button"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
-        android:textColor="@color/white"
-        android:text="@string/next"
-        />
+        android:layout_marginTop="@dimen/dimen_16"
+        android:layout_marginRight="@dimen/dimen_16"
+        android:layout_marginLeft="@dimen/dimen_16">
+
+        <Button
+            android:id="@+id/verify_phone_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_36"
+            android:background="@drawable/button_background"
+            android:textColor="@color/white"
+            android:text="@string/next"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
 
 
 </LinearLayout>
