@@ -13,4 +13,6 @@
     <string name="get_new_account">Get new account</string>
     <string name="save">Save</string>
     <string name="password">Password</string>
+    <string name="enter_password_again">Enter password again</string>
+    <string name="my_profile">My profile</string>
 </resources>

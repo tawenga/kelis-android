@@ -31,6 +31,7 @@ public class VerifyPhoneActivity extends AppCompatActivity
     private static final String TAG = "VerifyPhoneActivity";
 
     private static final String APPLICATION_KEY = "977c2ea9-9060-418e-ac82-f29471a7a977";
+    private static final int REQUEST_CODE = 1234;
 
     private Verification mVerification;
     private boolean mIsVerified;
@@ -46,7 +47,7 @@ public class VerifyPhoneActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_phone);
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         if (intent != null) {
             mPhoneNumber = intent.getStringExtra(EnterPhoneActivity.INTENT_PHONE_NUMBER);
             requestPermissions();
@@ -54,17 +55,18 @@ public class VerifyPhoneActivity extends AppCompatActivity
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.loading));
-
-        findViewById(R.id.verify_phone_button).setOnClickListener(new View.OnClickListener() {
+*/
+        findViewById(R.id.verify_input_code_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String code = ((EditText) findViewById(R.id.input_code_edit_text)).getText().toString();
+                goToSignUp();
+                /*String code = ((EditText) findViewById(R.id.input_code_edit_text)).getText().toString();
                 if (!code.isEmpty()) {
                     if (mVerification != null) {
                         mVerification.verify(code);
                         showProgress();
                     }
-                }
+                }*/
             }
         });
     }
@@ -84,7 +86,7 @@ public class VerifyPhoneActivity extends AppCompatActivity
             }
             ActivityCompat.requestPermissions(this,
                     missingPermissions.toArray(new String[missingPermissions.size()]),
-                    0);
+                    REQUEST_CODE);
         }
     }
 
