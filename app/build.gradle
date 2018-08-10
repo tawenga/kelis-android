@@ -15,6 +15,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+
+        }
     }
 }
 
@@ -24,6 +27,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:design:27.0.2'
     implementation 'com.android.support:support-v4:27.0.2'
+    implementation  project(':lib')
     implementation project(":sinch-android-verification-1.5.1")
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
