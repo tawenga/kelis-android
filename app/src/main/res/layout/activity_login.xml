@@ -4,7 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EnterPhoneActivity">
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_112"
+        android:textSize="@dimen/sp_36"
+        />
 
     <EditText
         android:id="@+id/phone_number_edit_text"
@@ -13,7 +24,11 @@
         android:hint="@string/enter_phone"
         android:maxLength="10"
         android:background="@drawable/edit_text_background"
-        android:inputType="phone">
+        android:inputType="phone"
+        android:layout_marginTop="@dimen/dimen_36"
+        android:layout_marginRight="@dimen/dimen_16"
+        android:layout_marginLeft="@dimen/dimen_16"
+        android:padding="@dimen/dimen_8">
 
     </EditText>
 
@@ -24,30 +39,40 @@
         android:hint="@string/password"
         android:maxLength="10"
         android:background="@drawable/edit_text_background"
-        android:inputType="textPassword">
+        android:inputType="textPassword"
+        android:layout_marginTop="@dimen/dimen_16"
+        android:layout_marginRight="@dimen/dimen_16"
+        android:layout_marginLeft="@dimen/dimen_16"
+        android:padding="@dimen/dimen_8">
 
     </EditText>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="@dimen/dimen_16"
+        android:layout_marginRight="@dimen/dimen_16"
+        android:layout_marginLeft="@dimen/dimen_16">
 
         <TextView
             android:id="@+id/new_account_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/get_new_account"/>
+            android:text="@string/get_new_account"
+            android:textColor="@color/blue"
+            android:layout_alignParentLeft="true"
+           android:layout_centerVertical="true"/>
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_36"
             android:background="@drawable/button_background"
             android:textColor="@color/white"
             android:text="@string/login"
+            android:layout_alignParentRight="true"
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
