@@ -1,4 +1,4 @@
 <resources>
     <string name="msv_no_filter">No filter</string>
-    <string name="msv_search_hint">Search&#8230;</string>
+    <string name="msv_search_hint">Search course or person</string>
 </resources>
