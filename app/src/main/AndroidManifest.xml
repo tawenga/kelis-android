@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name=".EnterPhoneActivity"
-            android:label="Verify your phone number"
+            android:label="@string/verify_your_phone_number"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +36,7 @@
         </activity>
         <activity
             android:name=".VerifyPhoneActivity"
-            android:label="@string/app_name"
+            android:label="@string/verification_code"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".SignUpActivity"
-            android:label="@string/app_name"
+            android:label="@string/save_password"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

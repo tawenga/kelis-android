@@ -15,4 +15,7 @@
     <string name="password">Password</string>
     <string name="enter_password_again">Enter password again</string>
     <string name="my_profile">My profile</string>
+    <string name="verify_your_phone_number">Verify your phone number</string>
+    <string name="verification_code">Verification code</string>
+    <string name="save_password">Save password</string>
 </resources>

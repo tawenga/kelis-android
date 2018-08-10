@@ -1,10 +1,18 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".VerifyPhoneActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@color/white"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <TextView
         android:id="@+id/input_code_instructions_text_view"
@@ -12,25 +20,36 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/enter_the_code_received_through_sms"/>
+        android:text="@string/enter_the_code_received_through_sms"
+        android:layout_marginTop="@dimen/dimen_24"
+        android:layout_marginRight="@dimen/dimen_16"
+        android:layout_marginLeft="@dimen/dimen_16"/>
 
-    <EditText android:id="@+id/input_code_edit_text"
+    <EditText
+        android:id="@+id/input_code_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:inputType="number"
         android:hint="@string/enter_code"
         android:background="@drawable/edit_text_background"
+        android:layout_marginTop="@dimen/dimen_16"
+        android:padding="@dimen/dimen_8"
+        android:textAlignment="center"
+        android:maxLength="4"
+        android:layout_gravity="center"
         />
 
     <Button
         android:id="@+id/verify_input_code_button"
+        android:layout_width="@dimen/dimen_84"
+        android:layout_height="@dimen/dimen_36"
         android:background="@drawable/button_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:textColor="@color/white"
-        android:text="@string/next" />
+        android:text="@string/next"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_24"
+        />
+
 </LinearLayout>
 
 
