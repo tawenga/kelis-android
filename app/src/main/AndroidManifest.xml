@@ -57,7 +57,7 @@
         </activity>
         <activity
             android:name=".CreateProfileActivity"
-            android:label="@string/app_name"
+            android:label="@string/create_your_profile"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -35,9 +35,9 @@ public class LoginActivity extends AppCompatActivity {
                 String password = mPasswordEditText.getText().toString().trim();
 
                 if(phoneNumber.isEmpty() || phoneNumber.length() < 10){
-                    mPhoneNumberEditText.setError("Please enter a correct number");
+                    mPhoneNumberEditText.setError("Please type a correct number");
                 }else if (password.isEmpty()){
-                    mPasswordEditText.setError("Please enter a password");;
+                    mPasswordEditText.setError("Please type a password");;
                 } else {
                     // login(phoneNumber, password);
                 }

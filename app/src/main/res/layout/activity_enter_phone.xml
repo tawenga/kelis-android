@@ -18,7 +18,7 @@
         android:id="@+id/phone_number_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_phone"
+        android:hint="@string/type_phone"
         android:maxLength="10"
         android:background="@drawable/edit_text_background"
         android:inputType="phone"
@@ -33,7 +33,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_16"
+        android:layout_marginTop="@dimen/dimen_36"
         android:layout_marginRight="@dimen/dimen_16"
         android:layout_marginLeft="@dimen/dimen_16">
 

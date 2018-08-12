@@ -64,7 +64,7 @@ public class VerifyPhoneActivity extends AppCompatActivity
                         showProgress();
                     }
                 }else {
-                    mInputCodeEditText.setError("Please enter the code");
+                    mInputCodeEditText.setError("Please type the code");
                 }
             }
         });

@@ -45,7 +45,7 @@ public class EnterPhoneActivity extends AppCompatActivity {
             public void onClick(View v) {
                 phoneNumber = mPhoneNumberEditText.getText().toString().trim();
                 if(phoneNumber.isEmpty() || phoneNumber.length() < 10){
-                    mPhoneNumberEditText.setError("Please enter a correct number");
+                    mPhoneNumberEditText.setError("Please type a correct number");
                 }else {
                     String internationalizedPhoneNumber = formatPhoneNumber(phoneNumber);
                     goToVerifyPhone(internationalizedPhoneNumber);

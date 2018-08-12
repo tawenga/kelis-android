@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Kelis</string>
     <string name="action_settings">Settings</string>
-    <string name="enter_phone">Enter phone (0700123456)</string>
-    <string name="enter_the_code_received_through_sms">Enter the code received through sms</string>
+    <string name="type_phone">Type phone (0700123456)</string>
+    <string name="type_the_code_received_via_sms">Type the code received via sms</string>
     <string name="enter_code">Enter code</string>
     <string name="next">Next</string>
     <string name="please_try_again">Please try again</string>
@@ -13,9 +13,14 @@
     <string name="create_new_account">Create new account</string>
     <string name="save">Save</string>
     <string name="password">Password</string>
-    <string name="enter_password_again">Enter password again</string>
+    <string name="type_password_again">Type password again</string>
     <string name="my_profile">My profile</string>
     <string name="verify_your_phone_number">Verify your phone number</string>
     <string name="verification_code">Verification code</string>
     <string name="save_password">Save password</string>
+    <string name="create_your_profile">Create your profile</string>
+    <string name="add_photo">Add photo</string>
+    <string name="my_photo">My photo</string>
+    <string name="select_your_course">Select your course</string>
+    <string name="year">Year</string>
 </resources>

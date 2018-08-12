@@ -41,14 +41,21 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String password = mPasswordEditText.getText().toString().trim();
                 String passwordConfirmation = mPasswordConfirmationEditText.getText().toString().trim();
-                if(!password.isEmpty() && password.equals(passwordConfirmation)) {
-                   // signUp(mPhoneNumber, password);
-                    String user_id = "1";
-                    Intent createProfile = new Intent(SignUpActivity.this, CreateProfileActivity.class);
-                    createProfile.putExtra(INTENT_USER_ID, user_id);
-                    startActivity(createProfile);
+                if(!password.isEmpty()) {
+                    if (password.equals(passwordConfirmation)) {
+                        mPasswordEditText.setText(null);
+                        mPasswordConfirmationEditText.setText(null);
+                        // signUp(mPhoneNumber, password);
+                        String user_id = "1";
+                        Intent createProfile = new Intent(SignUpActivity.this, CreateProfileActivity.class);
+                        createProfile.putExtra(INTENT_USER_ID, user_id);
+                        startActivity(createProfile);
+                        finish();
+                    } else {
+                        mPasswordConfirmationEditText.setError("Please type the same password");
+                    }
                 }else {
-                    mPasswordConfirmationEditText.setText("Please enter same password");
+                    mPasswordEditText.setError("Please type a password");
                 }
 
             }

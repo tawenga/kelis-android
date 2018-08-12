@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/enter_the_code_received_through_sms"
+        android:text="@string/type_the_code_received_via_sms"
         android:layout_marginTop="@dimen/dimen_24"
         android:layout_marginRight="@dimen/dimen_16"
         android:layout_marginLeft="@dimen/dimen_16"/>
@@ -47,7 +47,7 @@
         android:textColor="@color/white"
         android:text="@string/next"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dimen_24"
+        android:layout_marginTop="@dimen/dimen_36"
         />
 
 </LinearLayout>
