@@ -3,8 +3,17 @@ package com.kelis;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -24,7 +33,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String phoneNumber = mPhoneNumberEditText.getText().toString().trim();
                 String password = mPasswordEditText.getText().toString().trim();
-                login(phoneNumber, password);
+
+                if(phoneNumber.isEmpty() || phoneNumber.length() < 10){
+                    mPhoneNumberEditText.setError("Please enter a correct number");
+                }else if (password.isEmpty()){
+                    mPasswordEditText.setError("Please enter a password");;
+                } else {
+                    // login(phoneNumber, password);
+                }
             }
         });
 
@@ -37,6 +53,28 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(String phoneNumber, String password){
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        AndroidNetworking.post(App.APP_DOMAIN + "login")
+                .addBodyParameter("username", phoneNumber)
+                .addBodyParameter("password", password)
+                .setTag("login")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        //if status ==true
+                        try {
+                            Log.d("LoginActivity", response.get("status").toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                    }
+                });
     }
 }

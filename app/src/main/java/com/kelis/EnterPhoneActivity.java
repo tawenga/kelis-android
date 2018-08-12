@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,9 +45,11 @@ public class EnterPhoneActivity extends AppCompatActivity {
             public void onClick(View v) {
                 phoneNumber = mPhoneNumberEditText.getText().toString().trim();
                 if(phoneNumber.isEmpty() || phoneNumber.length() < 10){
-                    mPhoneNumberEditText.setError("Wrong number");
+                    mPhoneNumberEditText.setError("Please enter a correct number");
                 }else {
-                    goToVerifyPhone(phoneNumber);
+                    String internationalizedPhoneNumber = formatPhoneNumber(phoneNumber);
+                    goToVerifyPhone(internationalizedPhoneNumber);
+
                 }
             }
         });
@@ -56,6 +59,11 @@ public class EnterPhoneActivity extends AppCompatActivity {
         Intent verification = new Intent(this, VerifyPhoneActivity.class);
         verification.putExtra(INTENT_PHONE_NUMBER, phoneNumber);
         startActivity(verification);
+    }
+
+    private String formatPhoneNumber(String phoneNumber){
+        String phoneNumberWithoutBegginingZero = phoneNumber.substring(1, phoneNumber.length());
+        return "+254" + phoneNumberWithoutBegginingZero;
     }
 }
 

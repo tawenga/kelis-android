@@ -26,6 +26,8 @@ import com.sinch.verification.VerificationListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kelis.EnterPhoneActivity.INTENT_PHONE_NUMBER;
+
 public class VerifyPhoneActivity extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -37,6 +39,7 @@ public class VerifyPhoneActivity extends AppCompatActivity
     private Verification mVerification;
     private boolean mIsVerified;
     private String mPhoneNumber;
+    private EditText mInputCodeEditText;
     ProgressDialog progressDialog;
     private static final String[] SMS_PERMISSIONS = { Manifest.permission.INTERNET,
             Manifest.permission.READ_SMS,
@@ -50,34 +53,35 @@ public class VerifyPhoneActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        /*Intent intent = getIntent();
-        if (intent != null) {
-            mPhoneNumber = intent.getStringExtra(EnterPhoneActivity.INTENT_PHONE_NUMBER);
-            requestPermissions();
-        }
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.loading));
-*/
+        mInputCodeEditText = (EditText) findViewById(R.id.input_code_edit_text);
         findViewById(R.id.verify_input_code_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToSignUp();
-                /*String code = ((EditText) findViewById(R.id.input_code_edit_text)).getText().toString();
-                if (!code.isEmpty()) {
+                String code = mInputCodeEditText.getText().toString();
+                if (!code.isEmpty() && code.length() == 4) {
                     if (mVerification != null) {
                         mVerification.verify(code);
                         showProgress();
                     }
-                }*/
+                }else {
+                    mInputCodeEditText.setError("Please enter the code");
+                }
             }
         });
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.loading));
+        progressDialog.setCancelable(false);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            mPhoneNumber = intent.getStringExtra(INTENT_PHONE_NUMBER);
+            requestPermissions();
+        }
     }
 
     private void requestPermissions() {
         List<String> missingPermissions;
-        String methodText;
 
         missingPermissions = getMissingPermissions(SMS_PERMISSIONS);
 
@@ -146,7 +150,7 @@ public class VerifyPhoneActivity extends AppCompatActivity
 
         @Override
         public void onInitiated(InitiationResult result) {
-            Log.d(TAG, "Initialized!");
+            Log.d(TAG, "Verification initialized!");
             showProgress();
         }
 
@@ -191,8 +195,9 @@ public class VerifyPhoneActivity extends AppCompatActivity
     }
 
     public void goToSignUp(){
-        startActivity(new Intent(VerifyPhoneActivity.this, SignUpActivity.class));
+        Intent signUp = new Intent(this, SignUpActivity.class);
+        signUp.putExtra(INTENT_PHONE_NUMBER, mPhoneNumber);
+        startActivity(signUp);
     }
 
 }
-
