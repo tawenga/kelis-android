@@ -1,7 +1,9 @@
 package com.kelis;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -84,5 +86,11 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
 
     public void goToMyProfile(){
         startActivity(new Intent(MainActivity.this, EditProfileActivity.class));
+    }
+
+    public void retrieveFromPrefs(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String userId = preferences.getString("user_id", "");
+        String courseNameAndYear = preferences.getString("course_name_and_year", "");
     }
 }

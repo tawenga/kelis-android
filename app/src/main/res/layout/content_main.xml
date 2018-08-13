@@ -17,4 +17,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--<com.github.abdularis.civ.AvatarImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/figure2"
+        app:strokeColor="#1976D2"
+        app:strokeWidth="1dp"
+        app:state="IMAGE"
+        app:avatarBackgroundColor="#1976D2"
+        app:text="B"
+        app:textSize="22sp"/>-->
+
 </android.support.constraint.ConstraintLayout>

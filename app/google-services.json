@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "275352418945",
+    "firebase_url": "https://kelis-api.firebaseio.com",
+    "project_id": "kelis-api",
+    "storage_bucket": "kelis-api.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275352418945:android:846391e7c611b55d",
+        "android_client_info": {
+          "package_name": "com.kelis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275352418945-spfc0qq3868up43l85hg95855a9ntj4s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kelis",
+            "certificate_hash": "86caa3ff71e133d4eac98ffad3ddc98cb696560a"
+          }
+        },
+        {
+          "client_id": "275352418945-mtjmjmjobvvf5emm14e8h4o1572i9lse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABN2AqUWPje8ppGm5klfeJkhdCa_UrVQk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275352418945-mtjmjmjobvvf5emm14e8h4o1572i9lse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
