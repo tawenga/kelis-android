@@ -45,12 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
                     if (password.equals(passwordConfirmation)) {
                         mPasswordEditText.setText(null);
                         mPasswordConfirmationEditText.setText(null);
-                        // signUp(mPhoneNumber, password);
-                        String user_id = "1";
-                        Intent createProfile = new Intent(SignUpActivity.this, CreateProfileActivity.class);
-                        createProfile.putExtra(INTENT_USER_ID, user_id);
-                        startActivity(createProfile);
-                        finish();
+                        signUp(mPhoneNumber, password);
                     } else {
                         mPasswordConfirmationEditText.setError("Please type the same password");
                     }
@@ -106,6 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
                             Intent createProfile = new Intent(SignUpActivity.this, CreateProfileActivity.class);
                             createProfile.putExtra(INTENT_USER_ID, user_id);
                             startActivity(createProfile);
+                            finish();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -132,7 +132,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         });
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.saving));
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.setCancelable(false);
     }
 

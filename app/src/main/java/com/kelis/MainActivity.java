@@ -6,18 +6,29 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.claudiodegio.msv.BaseMaterialSearchView;
 import com.claudiodegio.msv.OnSearchViewListener;
 import com.claudiodegio.msv.SuggestionMaterialSearchView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements OnSearchViewListener{
 
     BaseMaterialSearchView searchView;
     SuggestionMaterialSearchView mSearchView;
+    String mUserId;
+    String mCourseNameYear;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +43,14 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
         mSearchView = (SuggestionMaterialSearchView)searchView;
 
         mSearchView.setSuggestion(arrays, true);
-        mSearchView.setOnSearchViewListener(MainActivity.this); // this class implements OnSearchViewListener
+        mSearchView.setOnSearchViewListener(MainActivity.this);
+
+        retrieveFromPrefs();
+        if (!mUserId.isEmpty()) {
+            search(mCourseNameYear);
+        }else {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        }
     }
 
     @Override
@@ -57,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
     @Override
     public boolean onQueryTextSubmit(String query) {
         // handle text submit and then return true
+        if(query != null){
+
+        }
         Log.d("MainActivity", query);
         return false;
     }
@@ -90,7 +111,36 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
 
     public void retrieveFromPrefs(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String userId = preferences.getString("user_id", "");
-        String courseNameAndYear = preferences.getString("course_name_and_year", "");
+        mUserId = preferences.getString("user_id", "");
+        mCourseNameYear= preferences.getString("course_name_and_year", "");
+    }
+
+    private void search(String keyword){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("keyword", keyword);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AndroidNetworking.post(App.APP_DOMAIN + "search")
+                .addJSONObjectBody(jsonObject)
+                .setTag("search")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                       // hideProgress();
+                        Log.d("MainActivityRes", response.toString());
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                       // hideProgress();
+                        error.printStackTrace();
+                        Toast.makeText(MainActivity.this, "Please try again", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
     }
 }
