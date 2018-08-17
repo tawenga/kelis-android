@@ -111,7 +111,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onError(ANError error) {
                         // handle error
                         hideProgress();
-                        Log.d("loginxxx", error.toString());
                         clearEditText();
                         error.printStackTrace();
                     }
@@ -128,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             hideProgress();
-                            Log.d("loginxxx", response.toString());
+                            clearEditText();
                             String courseNameAndYear = response.getString("course_name_and_year");
                             saveToPrefs(userId, courseNameAndYear);
                             Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);

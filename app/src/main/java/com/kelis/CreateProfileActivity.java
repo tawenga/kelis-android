@@ -201,7 +201,7 @@ public class CreateProfileActivity extends AppCompatActivity {
     }
 
     private void createUserProfile(String username, String course_name_and_year,
-                                   String photo){
+                                   final String photo){
             JSONObject jsonObject = new JSONObject();
             try {
                 jsonObject.put("user_id", Integer.parseInt(userId));
@@ -224,7 +224,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             hideProgress();
-                            saveToPrefs(userId, courseNameAndYear);
+                            saveToPrefs(userId, courseNameAndYear, photo);
                             Intent createProfile = new Intent(CreateProfileActivity.this, MainActivity.class);
                             startActivity(createProfile);
                             finish();
@@ -239,11 +239,12 @@ public class CreateProfileActivity extends AppCompatActivity {
                     });
     }
 
-    public void saveToPrefs(String userId, String courseNameAndYear){
+    public void saveToPrefs(String userId, String courseNameAndYear, String photo){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("user_id", userId);
         editor.putString("course_name_and_year", courseNameAndYear);
+        editor.putString("photo", photo);
         editor.apply();
     }
 

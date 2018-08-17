@@ -1,5 +1,8 @@
 package com.kelis;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class UserProfile {
 
     public int user_id;
@@ -18,8 +21,25 @@ public class UserProfile {
         this.username = username;
         this.course_name_and_year = course_name_and_year;
         this.photo = photo;
-        this.thumbs_up =thumbs_up;
+        this.thumbs_up = thumbs_up;
         this.thumbs_down = thumbs_down;
+    }
+
+    public UserProfile(JSONObject object) {
+        try {
+            this.user_id = object.getInt("user_id");
+            this.username = object.getString("username");
+            this.course_name_and_year = object.getString("course_name_and_year");
+            this.photo = object.getString("photo");
+            this.thumbs_up = object.getInt("thumbs_up");
+            this.thumbs_down = object.getInt("thumbs_down");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getUserId(){
+        return user_id;
     }
 
     public String getUsername() {

@@ -138,8 +138,6 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
                     public void onError(ANError error) {
                        // hideProgress();
                         error.printStackTrace();
-                        Toast.makeText(MainActivity.this, "Please try again", Toast.LENGTH_LONG)
-                                .show();
                     }
                 });
     }

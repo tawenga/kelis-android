@@ -32,6 +32,7 @@ dependencies {
     implementation project(':lib')
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
     implementation 'com.github.abdularis:CircularImageView:v1.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.jaredrummler:material-spinner:1.2.5'
     implementation project(":sinch-android-verification-1.5.1")
     implementation 'com.google.firebase:firebase-storage:11.8.0'
