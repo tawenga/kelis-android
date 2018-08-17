@@ -45,8 +45,6 @@ public class CreateProfileActivity extends AppCompatActivity {
     String courseYear;
     String courseNameAndYear;
     public String photo;
-    public int thumbsUp;
-    public int thumbsDown;
 
     EditText mFirstNameEditText;
     EditText mLastNameEditText;
@@ -134,7 +132,8 @@ public class CreateProfileActivity extends AppCompatActivity {
         });
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.loading));
+        progressDialog.setMessage(getString(R.string.saving));
+        progressDialog.setCancelable(false);
     }
 
     private void choosePhoto() {
@@ -174,8 +173,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             //dismissing the progress dialog
                            photo = taskSnapshot.getDownloadUrl().toString();
-                            Log.d("CreateProfileResponse", photo);
-                           createUserProfile(userId, username, courseNameAndYear, photo);
+                           createUserProfile(username, courseNameAndYear, photo);
 
                         }
                     })
@@ -188,7 +186,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                     });
         } else {
             photo = "";
-            createUserProfile(userId, username, courseNameAndYear, photo);
+            createUserProfile(username, courseNameAndYear, photo);
         }
 
     }
@@ -202,7 +200,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
-    private void createUserProfile(String user_id, String username, String course_name_and_year,
+    private void createUserProfile(String username, String course_name_and_year,
                                    String photo){
             JSONObject jsonObject = new JSONObject();
             try {
@@ -212,6 +210,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 jsonObject.put("photo", photo);
                 jsonObject.put("thumbs_up", 0);
                 jsonObject.put("thumbs_down", 0);
+                Log.d("CreateProfile", jsonObject.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -225,15 +224,15 @@ public class CreateProfileActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             hideProgress();
-                            Log.d("CreateProfileResponse", response.toString());
                             saveToPrefs(userId, courseNameAndYear);
                             Intent createProfile = new Intent(CreateProfileActivity.this, MainActivity.class);
                             startActivity(createProfile);
+                            finish();
                         }
                         @Override
                         public void onError(ANError error) {
                             hideProgress();
-                            Log.d("CreateProfileResponse", error.toString());
+                            error.printStackTrace();
                             Toast.makeText(CreateProfileActivity.this, "Please try again", Toast.LENGTH_LONG)
                                     .show();
                         }

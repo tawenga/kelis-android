@@ -14,7 +14,7 @@
     <string name="save">Save</string>
     <string name="password">Password</string>
     <string name="type_password_again">Type password again</string>
-    <string name="my_profile">My profile</string>
+    <string name="change_photo">Change photo</string>
     <string name="verify_your_phone_number">Verify your phone number</string>
     <string name="verification_code">Verification code</string>
     <string name="save_password">Save password</string>
@@ -23,4 +23,5 @@
     <string name="my_photo">My photo</string>
     <string name="select_your_course">Select your course</string>
     <string name="year">Year</string>
+    <string name="saving">Saving…</string>
 </resources>

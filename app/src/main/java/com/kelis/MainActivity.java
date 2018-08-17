@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_my_profile) {
+        if (id == R.id.action_change_photo) {
             goToMyProfile();
             return true;
         }
