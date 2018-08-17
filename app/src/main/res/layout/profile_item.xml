@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_16"
+        >
+
+        <com.github.abdularis.civ.AvatarImageView
+            android:id="@+id/profile_photo_image_view"
+            android:layout_width="@dimen/dimen_48"
+            android:layout_height="@dimen/dimen_48"
+            android:src="@drawable/user_100"
+            app:strokeColor="@color/light_gray"
+            app:strokeWidth="@dimen/dimen_1"
+            app:state="IMAGE"
+            app:avatarBackgroundColor="@color/white"
+            app:text=""
+            android:layout_marginRight="@dimen/dimen_10"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_name_text_view"
+            android:layout_toRightOf="@+id/profile_photo_image_view"
+            android:layout_alignParentTop="true"
+            android:textSize="@dimen/sp_18"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/course_name_year_text_view"
+            android:layout_toRightOf="@+id/profile_photo_image_view"
+            android:layout_below="@+id/user_name_text_view"
+            />
+
+        <LinearLayout
+            android:id="@+id/thumbs_down_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/dimen_36">
+
+            <ImageView
+                android:id="@+id/thumbs_down_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_thumb_down_alt_white_24"
+                android:tint="@color/light_gray"
+                />
+
+            <TextView
+                android:id="@+id/num_thumbs_down_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text=""/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toLeftOf="@id/thumbs_down_layout">
+
+            <ImageView
+                android:id="@+id/thumbs_up_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_thumb_up_alt_white_24"
+                android:tint="@color/light_gray"
+
+                />
+
+            <TextView
+                android:id="@+id/num_thumbs_up_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text=""/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

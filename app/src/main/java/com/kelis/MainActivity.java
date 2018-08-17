@@ -5,11 +5,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -20,8 +24,12 @@ import com.claudiodegio.msv.BaseMaterialSearchView;
 import com.claudiodegio.msv.OnSearchViewListener;
 import com.claudiodegio.msv.SuggestionMaterialSearchView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnSearchViewListener{
 
@@ -29,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
     SuggestionMaterialSearchView mSearchView;
     String mUserId;
     String mCourseNameYear;
+
+    private List<UserProfile> userProfiles;
+    private RecyclerView rv;
+
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
 
         searchView = (BaseMaterialSearchView) findViewById(R.id.sv);
         String[] arrays = getResources().getStringArray(R.array.query_suggestions);
@@ -47,15 +64,20 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
 
         retrieveFromPrefs();
         if (!mUserId.isEmpty()) {
-            search(mCourseNameYear);
+            search(formatSearchKeyword(mCourseNameYear));
         }else {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
+
+        rv=(RecyclerView)findViewById(R.id.rv);
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+        rv.setHasFixedSize(true);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem item = menu.findItem(R.id.action_search);
         mSearchView.setMenuItem(item);
@@ -74,12 +96,10 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        // handle text submit and then return true
         if(query != null){
-
+            search(formatSearchKeyword(query));
         }
-        Log.d("MainActivity", query);
-        return false;
+        return true;
     }
 
     @Override
@@ -131,8 +151,20 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-                       // hideProgress();
-                        Log.d("MainActivityRes", response.toString());
+
+                        progressBar.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
+                        try {
+                            JSONArray resultsArray = response.getJSONArray("user_profiles");
+                            userProfiles = new ArrayList<>();
+                            for(int i = 0; i < resultsArray.length(); i++){
+                                userProfiles.add(new UserProfile(resultsArray.getJSONObject(i)));
+                                RVAdapter adapter = new RVAdapter(userProfiles, MainActivity.this);
+                                rv.setAdapter(adapter);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                     @Override
                     public void onError(ANError error) {
@@ -140,5 +172,9 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
                         error.printStackTrace();
                     }
                 });
+    }
+
+    public String formatSearchKeyword(String keyword){
+        return TextUtils.join("+", keyword.split(" "));
     }
 }

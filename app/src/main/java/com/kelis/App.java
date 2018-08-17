@@ -1,6 +1,7 @@
 package com.kelis;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.androidnetworking.AndroidNetworking;
 import com.google.firebase.storage.FirebaseStorage;
@@ -17,4 +18,5 @@ public class App extends Application {
         AndroidNetworking.initialize(getApplicationContext());
         mStorageRef = FirebaseStorage.getInstance().getReference();
     }
+
 }
