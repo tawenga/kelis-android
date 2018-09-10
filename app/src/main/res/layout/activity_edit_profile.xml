@@ -24,4 +24,14 @@
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/my_photo"/>
 
+    <ImageView
+        android:id="@+id/change_photo_image_view"
+        android:layout_width="@dimen/dimen_24"
+        android:layout_height="@dimen/dimen_24"
+        android:src="@drawable/baseline_camera_alt_white_48"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/change_photo"
+        android:tint="@color/colorAccent"
+         />
+
 </LinearLayout>

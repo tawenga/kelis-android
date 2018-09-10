@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 public class UserProfile {
 
+    public int id;
     public int user_id;
     public String username;
     public String course_name_and_year;
@@ -15,8 +16,9 @@ public class UserProfile {
     public UserProfile() {
     }
 
-    public UserProfile(int user_id, String username, String course_name_and_year,
+    public UserProfile(int id, int user_id, String username, String course_name_and_year,
                        String photo, int thumbs_up, int thumbs_down) {
+        this.id = id;
         this.user_id = user_id;
         this.username = username;
         this.course_name_and_year = course_name_and_year;
@@ -27,6 +29,7 @@ public class UserProfile {
 
     public UserProfile(JSONObject object) {
         try {
+            this.id = object.getInt("id");
             this.user_id = object.getInt("user_id");
             this.username = object.getString("username");
             this.course_name_and_year = object.getString("course_name_and_year");
@@ -36,6 +39,10 @@ public class UserProfile {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getId(){
+        return id;
     }
 
     public int getUserId(){

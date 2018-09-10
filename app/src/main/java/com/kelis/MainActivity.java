@@ -28,6 +28,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +54,10 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
         setSupportActionBar(toolbar);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        progressBar.setVisibility(View.VISIBLE);
+
+        if (hasInternet()) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
 
         searchView = (BaseMaterialSearchView) findViewById(R.id.sv);
         String[] arrays = getResources().getStringArray(R.array.query_suggestions);
@@ -97,7 +102,11 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
     @Override
     public boolean onQueryTextSubmit(String query) {
         if(query != null){
-            search(formatSearchKeyword(query));
+            mSearchView.closeSearch();
+            if (hasInternet()) {
+                progressBar.setVisibility(View.VISIBLE);
+                search(formatSearchKeyword(query));
+            }
         }
         return true;
     }
@@ -176,5 +185,16 @@ public class MainActivity extends AppCompatActivity implements OnSearchViewListe
 
     public String formatSearchKeyword(String keyword){
         return TextUtils.join("+", keyword.split(" "));
+    }
+
+    public  boolean hasInternet(){
+            try {
+                InetAddress inetAddress = InetAddress.getByName("google.com");
+                return  !inetAddress.equals("");
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+                return false;
+            }
+
     }
 }

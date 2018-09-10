@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -21,6 +23,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.BitmapRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.github.abdularis.civ.CircleImageView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,6 +45,7 @@ public class EditProfileActivity extends AppCompatActivity {
     UserProfile userProfile;
 
     CircleImageView mProfilePhoto;
+    ImageView mChangePhotoImageview;
     Uri filePath;
     ProgressDialog progressDialog;
 
@@ -65,8 +69,9 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
         mProfilePhoto = (CircleImageView) findViewById(R.id.my_photo_image_view);
+        mChangePhotoImageview = (ImageView) findViewById(R.id.change_photo_image_view);
 
-        mProfilePhoto.setOnClickListener(new View.OnClickListener() {
+        mChangePhotoImageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 choosePhoto();
@@ -81,9 +86,25 @@ public class EditProfileActivity extends AppCompatActivity {
         retrieveFromPrefs();
         if(!mCurrentPhoto.isEmpty()){
             fetchCurrentPhoto(mCurrentPhoto);
+            final ImagePopup imagePopup = new ImagePopup(EditProfileActivity.this);
+            imagePopup.setBackgroundColor(Color.TRANSPARENT);  // Optional
+            imagePopup.setFullScreen(true); // Optional
+            imagePopup.setHideCloseIcon(true);  // Optional
+            imagePopup.setImageOnClickClose(true);  // Optional
+            imagePopup.initiatePopupWithGlide(mCurrentPhoto);
+            mProfilePhoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    /** Initiate Popup view **/
+                    imagePopup.viewPopup();
+
+                }
+            });
         }
 
         getUserProfile(mUserId);
+
+
     }
 
     @Override
@@ -223,6 +244,8 @@ public class EditProfileActivity extends AppCompatActivity {
                 .placeholder(R.drawable.user_100)
                 .into(mProfilePhoto);
     }
+
+
 
     public void saveToPrefs(String photo){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
