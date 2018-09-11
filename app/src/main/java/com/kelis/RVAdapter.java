@@ -89,11 +89,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.UserProfileViewHol
 
     @Override
     public void onBindViewHolder(final UserProfileViewHolder userProfileViewHolder, final int i) {
-        final boolean[] unLikeStatus = new boolean[1];
-        final boolean[] likeStatus = new boolean[1];
+        final int userProfileId = userProfiles.get(i).getUserId();
         userProfileViewHolder.mUserNameTextView.setText(userProfiles.get(i).getUsername());
         userProfileViewHolder.mCourseYearTextView.setText(userProfiles.get(i).getCourseNameAndYear());
-
 
         if(!userProfiles.get(i).getPhoto().isEmpty()) {
             Picasso.get().load(userProfiles.get(i).getPhoto())
@@ -123,23 +121,134 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.UserProfileViewHol
         userProfileViewHolder.mThumbsUpLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                thumbsUpLogic();
+                thumbsUpLogic(userProfiles.get(i));
             }
         });
 
         userProfileViewHolder.mThumbsDownLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                thumbsDownLogic();
+                thumbsDownLogic(userProfiles.get(i));
             }
         });
 
     }
 
-    public void thumbsUpLogic(){
+    public void thumbsUpLogic(final UserProfile userProfile){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("liker_id", Integer.parseInt(myUserId()));
+            jsonObject.put("liked_id", userProfile.getUserId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AndroidNetworking.post(App.APP_DOMAIN + "like")
+                .addJSONObjectBody(jsonObject)
+                .setTag("like")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        addThumbsUp(userProfile);
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        error.printStackTrace();
+                    }
+                });
     }
 
-    public void thumbsDownLogic(){
+    public void thumbsDownLogic(final UserProfile userProfile){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("unliker_id", Integer.parseInt(myUserId()));
+            jsonObject.put("unliked_id", userProfile.getUserId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AndroidNetworking.post(App.APP_DOMAIN + "unlike")
+                .addJSONObjectBody(jsonObject)
+                .setTag("unlike")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        addThumbsDown(userProfile);
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        error.printStackTrace();
+                    }
+                });
+    }
+
+    public void addThumbsUp(UserProfile userProfile){
+        //see if you can do this in background
+        JSONObject jsonObject = new JSONObject();
+        try {
+            int numThumbsUp = userProfile.getThumbsUp() + 1;
+            jsonObject.put("user_id", userProfile.getUserId());
+            jsonObject.put("username", userProfile.getUsername());
+            jsonObject.put("course_name_and_year", userProfile.getCourseNameAndYear());
+            jsonObject.put("photo", userProfile.getPhoto());
+            jsonObject.put("thumbs_up", numThumbsUp);
+            jsonObject.put("thumbs_down", userProfile.getThumbsDown());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AndroidNetworking.put(App.APP_DOMAIN + "profiles/" + userProfile.getUserId())
+                .addJSONObjectBody(jsonObject)
+                .setTag("edit_profile_add_thumbs_up")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("successaddthumbsup", response.toString());
+                        //save to local
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        error.printStackTrace();
+                    }
+                });
+    }
+
+    public void addThumbsDown(UserProfile userProfile){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            int numThumbsDown = userProfile.getThumbsDown() + 1;
+            jsonObject.put("user_id", userProfile.getUserId());
+            jsonObject.put("username", userProfile.getUsername());
+            jsonObject.put("course_name_and_year", userProfile.getCourseNameAndYear());
+            jsonObject.put("photo", userProfile.getPhoto());
+            jsonObject.put("thumbs_up", userProfile.getThumbsUp());
+            jsonObject.put("thumbs_down", numThumbsDown);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AndroidNetworking.put(App.APP_DOMAIN + "profiles/" + userProfile.getUserId())
+                .addJSONObjectBody(jsonObject)
+                .setTag("edit_profile_add_thumbs_down")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("successaddthumbsdown", response.toString());
+                        //save to local
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        error.printStackTrace();
+                    }
+                });
     }
 
     @Override
@@ -149,6 +258,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.UserProfileViewHol
 
     public String myUserId(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString("user_id", "");
+        //return preferences.getString("user_id", "");
+        return "1";
     }
 }

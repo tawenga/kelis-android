@@ -51,9 +51,9 @@
 
             <ImageView
                 android:id="@+id/thumbs_down_image_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/outline_thumb_down_alt_white_24"
+                android:layout_width="@dimen/dimen_24"
+                android:layout_height="@dimen/dimen_24"
+                android:src="@drawable/round_thumb_down_alt_white_24dp"
                 android:tint="@color/light_gray"
                 />
 
@@ -75,9 +75,9 @@
 
             <ImageView
                 android:id="@+id/thumbs_up_image_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/outline_thumb_up_alt_white_24"
+                android:layout_width="@dimen/dimen_24"
+                android:layout_height="@dimen/dimen_24"
+                android:src="@drawable/round_thumb_up_alt_white_24dp"
                 android:tint="@color/light_gray"
 
                 />
